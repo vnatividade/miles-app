@@ -1,0 +1,60 @@
+---
+description: Agent execution rules for miles-app
+globs:
+  - "src/**/*"
+  - "tests/**/*"
+alwaysApply: true
+---
+
+# Agent Execution Rules
+
+## Before Coding
+
+The agent must understand:
+
+- objective
+- scope
+- acceptance criteria
+- architectural constraints
+- expected files to change
+
+## During Execution
+
+- keep changes scoped
+- prefer readability
+- avoid hidden side effects
+- preserve modularity
+- preserve traceability
+
+## Scraper Rules
+
+- provider logic must remain isolated
+- never mix business logic into scrapers
+- preserve raw provider data
+- use retries carefully
+- assume layouts may break
+
+## Backend Rules
+
+- prefer explicit APIs
+- avoid unnecessary abstractions
+- preserve MVP simplicity
+- use clear naming
+
+## Documentation Rules
+
+Update repository documentation when:
+
+- architecture changes
+- workflows change
+- operational behavior changes
+- contracts change
+
+## Done Criteria
+
+A task is only done when:
+
+- implementation works
+- ticket scope is respected
+- documentation is updated if needed
+- handoff exists

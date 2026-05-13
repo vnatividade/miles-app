@@ -46,6 +46,39 @@ created_at
 updated_at
 ```
 
+### Validation Rules
+
+```txt
+user_id: required until authentication exists
+origin_airport: required IATA code, normalized uppercase, exactly 3 characters
+destination_airport: required IATA code, normalized uppercase, exactly 3 characters
+start_date/end_date: required, end_date must be on or after start_date
+flexibility_days: 0 to 30
+cabin_class: economy, premium_economy, business or first
+passengers: 1 to 9
+max_miles: greater than 0
+max_cash_fee: optional, greater than or equal to 0 when provided
+programs: at least one loyalty program name
+frequency_minutes: 15 to 10080
+active: defaults to true
+```
+
+### API Contract
+
+Initial local/dev API endpoints:
+
+```txt
+POST /alerts
+GET /alerts
+GET /alerts/{id}
+PATCH /alerts/{id}
+DELETE /alerts/{id}
+```
+
+Authentication is not implemented yet. Alert ownership is represented by the
+explicit `user_id` field until a User/authentication ticket defines the source
+of the authenticated principal.
+
 ---
 
 ## SearchExecution

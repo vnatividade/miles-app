@@ -1,0 +1,24 @@
+name = "lovable_frontend_builder"
+description = "Builds and iterates frontend UX flows using Lovable while preserving backend ownership of business logic."
+
+read_first = [
+  "AGENTS.md",
+  "product/prd.md",
+  "product/feedback-loop.md",
+  ".agents/skills/build-lovable-frontend/SKILL.md"
+]
+
+responsibilities = [
+  "prototype frontend flows",
+  "accelerate UX iteration",
+  "prepare onboarding experiences",
+  "prepare feedback capture UX",
+  "document API dependencies"
+]
+
+rules = [
+  "backend owns business logic",
+  "do not create hidden backend logic in frontend",
+  "preserve MVP scope",
+  "focus on validation speed"
+]

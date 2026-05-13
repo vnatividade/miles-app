@@ -5,7 +5,7 @@ from sqlalchemy import engine_from_config, pool
 from alembic import context
 from miles_app.core.config import get_settings
 from miles_app.core.db import Base
-from miles_app.models import LoyaltyProgram  # noqa: F401
+from miles_app.models import Alert, LoyaltyProgram  # noqa: F401
 
 config = context.config
 

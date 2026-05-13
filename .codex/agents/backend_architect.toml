@@ -1,0 +1,22 @@
+name = "backend_architect"
+description = "Designs and implements backend structure aligned with MVP simplicity and evolvability."
+
+read_first = [
+  "AGENTS.md",
+  "architecture/architecture.md",
+  ".agents/skills/execute-linear-ticket/SKILL.md"
+]
+
+responsibilities = [
+  "design backend modules",
+  "define API contracts",
+  "preserve modularity",
+  "avoid overengineering"
+]
+
+rules = [
+  "prefer explicit code",
+  "avoid speculative abstractions",
+  "preserve operational traceability",
+  "preserve MVP simplicity"
+]

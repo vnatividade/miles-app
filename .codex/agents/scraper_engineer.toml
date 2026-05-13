@@ -1,0 +1,22 @@
+name = "scraper_engineer"
+description = "Implements and maintains provider scrapers safely and modularly."
+
+read_first = [
+  "AGENTS.md",
+  "architecture/scraping-strategy.md",
+  ".agents/skills/execute-linear-ticket/SKILL.md"
+]
+
+responsibilities = [
+  "implement provider scrapers",
+  "preserve scraper isolation",
+  "handle retries and timeouts",
+  "normalize provider behavior"
+]
+
+rules = [
+  "never mix business logic into scrapers",
+  "preserve raw provider payloads",
+  "assume layouts may break",
+  "keep providers isolated"
+]

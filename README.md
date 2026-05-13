@@ -46,7 +46,27 @@ Resposta esperada:
 docker compose up --build
 ```
 
-O `docker-compose.yml` inclui um PostgreSQL local para preparação de desenvolvimento, mas a aplicação ainda não depende de uma conexão real com banco.
+O `docker-compose.yml` inclui um PostgreSQL local para desenvolvimento. O endpoint `/health` não depende de banco, mas endpoints de persistência usam `DATABASE_URL`.
+
+### Banco local e migrations
+
+Subir apenas o PostgreSQL local:
+
+```bash
+docker compose up -d postgres
+```
+
+Aplicar migrations:
+
+```bash
+python -m alembic upgrade head
+```
+
+Reverter a migration atual:
+
+```bash
+python -m alembic downgrade base
+```
 
 ### Checks
 

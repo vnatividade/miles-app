@@ -1,7 +1,9 @@
 from functools import lru_cache
 
-from pydantic import Field
+from pydantic import Field, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
+
+LOCAL_DATABASE_URL = "postgresql+psycopg://miles_app:miles_app_local@localhost:5432/miles_app"
 
 
 class Settings(BaseSettings):
@@ -15,7 +17,7 @@ class Settings(BaseSettings):
     app_name: str = Field(default="miles-app")
     log_level: str = Field(default="INFO")
 
-    database_url: str | None = Field(default=None)
+    database_url: str = Field(default=LOCAL_DATABASE_URL)
 
     scraper_timeout: int = Field(default=30)
     scraper_retry_limit: int = Field(default=3)
@@ -30,8 +32,14 @@ class Settings(BaseSettings):
     dd_env: str = Field(default="local")
     dd_version: str = Field(default="0.1.0")
 
+    @field_validator("database_url", mode="before")
+    @classmethod
+    def use_local_database_url_when_empty(cls, value: str | None) -> str:
+        if value is None or not value.strip():
+            return LOCAL_DATABASE_URL
+        return value
+
 
 @lru_cache
 def get_settings() -> Settings:
     return Settings()
-

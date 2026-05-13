@@ -1,0 +1,56 @@
+# Codex project configuration — miles-app
+
+# This file is intentionally free of secrets.
+# Local credentials, MCP tokens and environment-specific values must stay outside the repository.
+
+[project]
+name = "miles-app"
+description = "Agentic MVP for automated monitoring of mileage flight opportunities."
+primary_language = "python"
+repository = "vnatividade/miles-app"
+linear_project = "miles-app"
+linear_team = "Pipe Venture Builder"
+
+[context]
+read_first = [
+  "AGENTS.md",
+  "product/",
+  "architecture/",
+  "execution/",
+  "agents/",
+  ".agents/skills/"
+]
+
+[execution]
+require_linear_ticket = true
+one_ticket_per_branch = true
+require_pr_handoff = true
+require_scope_control = true
+require_docs_update_when_architecture_changes = true
+
+[branching]
+patterns = [
+  "feature/<ticket>-<short-description>",
+  "fix/<ticket>-<short-description>",
+  "chore/<ticket>-<short-description>"
+]
+
+[pull_request]
+template = ".github/pull_request_template.md"
+require_ticket_reference = true
+require_risks_section = true
+require_handoff_section = true
+require_suggested_next_ticket = true
+
+[mcp]
+# Configure Linear/GitHub MCP in the local Codex environment, not here.
+# This repository only documents expected behavior.
+linear_enabled = true
+github_enabled = true
+secrets_in_repo = false
+
+[quality]
+prefer_simple_code = true
+avoid_premature_abstraction = true
+preserve_raw_scraper_data = true
+preserve_operational_traceability = true

@@ -1,0 +1,74 @@
+---
+description: Miles-app operating model for Cursor agents
+globs:
+  - "**/*"
+alwaysApply: true
+---
+
+# miles-app — Cursor Operating Model
+
+## Required Context
+
+Before making changes, read the relevant files in this order:
+
+1. `product/`
+2. `architecture/`
+3. `execution/`
+4. `agents/`
+5. assigned Linear ticket
+
+## Source of Truth
+
+- Product and architecture context live in the repository.
+- Operational execution lives in Linear.
+- Every meaningful change must be linked to a Linear ticket.
+
+## Execution Rules
+
+- Do not implement without a ticket.
+- Work on one ticket scope at a time.
+- Avoid unrelated changes.
+- Update documentation when changing architecture, workflows, or operational behavior.
+- Leave handoff notes in the PR and/or Linear ticket.
+
+## MVP Discipline
+
+Prefer:
+- simple implementation
+- explicit code
+- fast validation
+- operational traceability
+
+Avoid:
+- premature abstractions
+- microservices before validation
+- speculative features
+- hidden assumptions
+
+## Branching
+
+Use branches in this format:
+
+```txt
+feature/<ticket>-short-description
+fix/<ticket>-short-description
+chore/<ticket>-short-description
+```
+
+Example:
+
+```txt
+feature/PIP-7-scraper-base-contract
+```
+
+## PR Requirements
+
+Every PR must include:
+
+- Linear ticket
+- context
+- scope included/excluded
+- acceptance criteria
+- risks
+- handoff
+- suggested next ticket

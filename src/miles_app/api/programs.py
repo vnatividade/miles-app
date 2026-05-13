@@ -1,27 +1,10 @@
 from typing import Annotated
 
 from fastapi import APIRouter, Depends, status
-from pydantic import BaseModel, ConfigDict, Field
 
 from miles_app.api.dependencies import get_program_service
+from miles_app.schemas.programs import ProgramCreateRequest, ProgramResponse
 from miles_app.services import ProgramService
-
-
-class ProgramCreateRequest(BaseModel):
-    name: str = Field(
-        min_length=1,
-        max_length=120,
-        examples=["Smiles"],
-        description="Loyalty program display name.",
-    )
-
-
-class ProgramResponse(BaseModel):
-    model_config = ConfigDict(from_attributes=True)
-
-    id: int = Field(description="Internal program identifier.")
-    name: str = Field(description="Loyalty program display name.")
-
 
 ProgramServiceDependency = Annotated[ProgramService, Depends(get_program_service)]
 

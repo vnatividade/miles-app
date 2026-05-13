@@ -158,11 +158,25 @@ PATCH /alerts/{id}
 DELETE /alerts/{id}
 ```
 
+Status:
+
+```txt
+implemented with local/dev persistence
+```
+
 ## Opportunities
 
 ```txt
 GET /opportunities
 GET /opportunities/{id}
+```
+
+Status:
+
+```txt
+placeholder contract
+GET /opportunities returns an empty list until opportunity persistence exists
+GET /opportunities/{id} returns 404 until opportunity persistence exists
 ```
 
 ## Feedback
@@ -172,11 +186,27 @@ POST /feedback
 GET /feedback/summary
 ```
 
+Status:
+
+```txt
+placeholder contract
+POST /feedback accepts and echoes payloads without persistence
+GET /feedback/summary returns zero-state metrics
+```
+
 ## Notifications
 
 ```txt
 GET /notifications
 PATCH /notifications/{id}/status
+```
+
+Status:
+
+```txt
+placeholder contract
+GET /notifications returns an empty list until notification persistence exists
+PATCH /notifications/{id}/status returns 404 until notification persistence exists
 ```
 
 ## Health
@@ -204,6 +234,14 @@ Required fields:
 - programs
 - nonstop only
 - notification channel
+
+Backend reconciliation:
+
+```txt
+Alert persistence supports every field above except notification channel.
+Notification channel remains a follow-up contract because notification
+preferences and notification delivery are not implemented yet.
+```
 
 ---
 
@@ -237,6 +275,14 @@ Required fields:
 - feedback type
 - rating or reason
 - optional comment
+
+Backend reconciliation:
+
+```txt
+Feedback contract exists, but UserFeedback persistence is not implemented yet.
+The frontend can integrate against POST /feedback as an accepted placeholder
+until feedback storage is implemented.
+```
 
 ---
 

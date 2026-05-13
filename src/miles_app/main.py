@@ -1,7 +1,10 @@
 from fastapi import FastAPI
 
 from miles_app.api.alerts import router as alerts_router
+from miles_app.api.feedback import router as feedback_router
 from miles_app.api.health import router as health_router
+from miles_app.api.notifications import router as notifications_router
+from miles_app.api.opportunities import router as opportunities_router
 from miles_app.api.programs import router as programs_router
 from miles_app.core.config import get_settings
 
@@ -11,6 +14,9 @@ def create_app() -> FastAPI:
     app = FastAPI(title=settings.app_name)
     app.include_router(health_router)
     app.include_router(alerts_router)
+    app.include_router(opportunities_router)
+    app.include_router(feedback_router)
+    app.include_router(notifications_router)
     app.include_router(programs_router)
     return app
 

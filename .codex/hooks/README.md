@@ -15,7 +15,7 @@ Hooks remain intentionally disabled unless a future implementation ticket explic
 ```txt
 Runtime hooks: disabled
 Hard blocks: disabled
-Soft warnings: implemented but not enabled for Stop and UserPromptSubmit reminders
+Soft warnings: implemented but not enabled for Stop, UserPromptSubmit and PreToolUse reminders
 ```
 
 No file in this directory should execute automatically until a future implementation ticket explicitly enables it.
@@ -94,22 +94,46 @@ The script is safe by design:
 
 ## PreToolUse
 
-Future goal:
+Current script:
+
+```txt
+.codex/hooks/pre_tool_risk_check.py
+```
+
+Goal:
 
 - warn before risky commands
-- detect potential secrets, deploys, paid ads, real Stripe charging, destructive DB operations or risky provider automation
+- detect potential secrets, deploys, paid ads, billing operations, destructive database/data operations, risky provider automation and dangerous filesystem operations
+- recommend relevant agents for risk review
 
-Initial mode:
+Mode:
 
 ```txt
 soft warning only
 ```
+
+Runtime status:
+
+```txt
+disabled by default
+```
+
+The script is safe by design:
+
+- no network access
+- no command mutation
+- no file mutation
+- no secrets access
+- no hard failure
+- exits 0
 
 Potential later mode:
 
 ```txt
 selective hard block for secrets, production, payment activation or destructive commands without explicit approval marker
 ```
+
+Do not implement hard blocks until soft-warning behavior has been validated.
 
 ---
 
@@ -187,13 +211,13 @@ hooks.json.disabled
 README.md
 stop_handoff_check.py
 user_prompt_activation_check.py
+pre_tool_risk_check.py
 ```
 
 Future implementation files may include:
 
 ```txt
 session_start_reminder.py
-pre_tool_risk_check.py
 ```
 
 Do not enable executable hooks without a dedicated implementation ticket.
@@ -216,6 +240,7 @@ This skeleton does not:
 
 # Recommended Next Steps
 
-1. Test Stop and UserPromptSubmit hooks locally/manual-only.
-2. Evaluate PreToolUse risk-warning hook.
-3. Only later evaluate selective hard blocks.
+1. Test Stop, UserPromptSubmit and PreToolUse hooks locally/manual-only.
+2. Validate actual Codex hook payload shape.
+3. Decide whether to enable soft-warning runtime hooks.
+4. Only later evaluate selective hard blocks.

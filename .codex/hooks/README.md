@@ -15,7 +15,7 @@ Hooks remain intentionally disabled unless a future implementation ticket explic
 ```txt
 Runtime hooks: disabled
 Hard blocks: disabled
-Soft warnings: implemented but not enabled for Stop handoff reminder
+Soft warnings: implemented but not enabled for Stop and UserPromptSubmit reminders
 ```
 
 No file in this directory should execute automatically until a future implementation ticket explicitly enables it.
@@ -56,18 +56,39 @@ soft reminder only
 
 ## UserPromptSubmit
 
-Future goal:
+Current script:
 
-- detect missing ticket ID
-- detect missing ticket type
-- detect approval-gated keywords
-- recommend Product Guardian, Risk Reviewer or Billing Strategy when needed
+```txt
+.codex/hooks/user_prompt_activation_check.py
+```
 
-Initial mode:
+Goal:
+
+- detect missing ticket ID when possible
+- detect missing ticket type when possible
+- detect approval-gated language
+- recommend relevant agents for risky language
+- remind agents to classify preflight requirements
+
+Mode:
 
 ```txt
 soft warning only
 ```
+
+Runtime status:
+
+```txt
+disabled by default
+```
+
+The script is safe by design:
+
+- no network access
+- no file mutation
+- no secrets access
+- no hard failure
+- exits 0
 
 ---
 
@@ -165,13 +186,13 @@ Hooks must not replace human approval.
 hooks.json.disabled
 README.md
 stop_handoff_check.py
+user_prompt_activation_check.py
 ```
 
 Future implementation files may include:
 
 ```txt
 session_start_reminder.py
-user_prompt_activation_check.py
 pre_tool_risk_check.py
 ```
 
@@ -195,7 +216,6 @@ This skeleton does not:
 
 # Recommended Next Steps
 
-1. Test Stop hook locally/manual-only.
-2. Implement UserPromptSubmit hook as soft warning.
-3. Evaluate PreToolUse risk-warning hook.
-4. Only later evaluate selective hard blocks.
+1. Test Stop and UserPromptSubmit hooks locally/manual-only.
+2. Evaluate PreToolUse risk-warning hook.
+3. Only later evaluate selective hard blocks.

@@ -6,7 +6,7 @@ Document the intended Codex hook structure for miles-app without enabling runtim
 
 This directory exists to prepare future soft-warning hooks around the Agent Activation Pipeline.
 
-Hooks are intentionally disabled in this PR.
+Hooks remain intentionally disabled unless a future implementation ticket explicitly enables them.
 
 ---
 
@@ -15,7 +15,7 @@ Hooks are intentionally disabled in this PR.
 ```txt
 Runtime hooks: disabled
 Hard blocks: disabled
-Soft warnings: not implemented yet
+Soft warnings: implemented but not enabled for Stop handoff reminder
 ```
 
 No file in this directory should execute automatically until a future implementation ticket explicitly enables it.
@@ -94,17 +94,37 @@ selective hard block for secrets, production, payment activation or destructive 
 
 ## Stop
 
-Future goal:
+Current script:
+
+```txt
+.codex/hooks/stop_handoff_check.py
+```
+
+Goal:
 
 - remind agents to complete handoff
 - remind agents to include activation checks performed
 - remind agents to recommend next ticket
 
-Initial mode:
+Mode:
 
 ```txt
 soft warning only
 ```
+
+Runtime status:
+
+```txt
+disabled by default
+```
+
+The script is safe by design:
+
+- no network access
+- no file mutation
+- no secrets access
+- no hard failure
+- exits 0
 
 ---
 
@@ -143,8 +163,8 @@ Hooks must not replace human approval.
 
 ```txt
 hooks.json.disabled
-policy-keywords.yml
 README.md
+stop_handoff_check.py
 ```
 
 Future implementation files may include:
@@ -153,10 +173,9 @@ Future implementation files may include:
 session_start_reminder.py
 user_prompt_activation_check.py
 pre_tool_risk_check.py
-stop_handoff_check.py
 ```
 
-Do not add executable hooks without a dedicated implementation ticket.
+Do not enable executable hooks without a dedicated implementation ticket.
 
 ---
 
@@ -165,7 +184,6 @@ Do not add executable hooks without a dedicated implementation ticket.
 This skeleton does not:
 
 - enable hooks
-- run scripts
 - block commands
 - change Codex Cloud behavior
 - replace PR review
@@ -177,7 +195,7 @@ This skeleton does not:
 
 # Recommended Next Steps
 
-1. Implement Stop hook as soft warning.
+1. Test Stop hook locally/manual-only.
 2. Implement UserPromptSubmit hook as soft warning.
 3. Evaluate PreToolUse risk-warning hook.
 4. Only later evaluate selective hard blocks.

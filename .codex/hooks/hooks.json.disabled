@@ -1,0 +1,64 @@
+{
+  "status": "disabled",
+  "purpose": "Illustrative Codex hooks configuration for future soft-warning activation checks.",
+  "warning": "Do not rename this file to hooks.json or enable runtime hooks without a dedicated implementation ticket and explicit approval.",
+  "hooks": {
+    "SessionStart": [
+      {
+        "description": "Future reminder to read operating docs and classify ticket type.",
+        "mode": "soft-warning-only",
+        "enabled": false,
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 .codex/hooks/session_start_reminder.py",
+            "statusMessage": "Reviewing agent activation checklist"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "description": "Future reminder for ticket ID, ticket type and approval-gated language.",
+        "mode": "soft-warning-only",
+        "enabled": false,
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 .codex/hooks/user_prompt_activation_check.py",
+            "statusMessage": "Checking activation requirements"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "description": "Future warning before risky commands such as deploys, secrets, paid ads, billing or destructive operations.",
+        "mode": "soft-warning-first",
+        "enabled": false,
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 .codex/hooks/pre_tool_risk_check.py",
+            "statusMessage": "Checking risky command"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "description": "Future reminder to complete PR/handoff/postflight sections.",
+        "mode": "soft-warning-only",
+        "enabled": false,
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 .codex/hooks/stop_handoff_check.py",
+            "statusMessage": "Checking handoff completeness"
+          }
+        ]
+      }
+    ]
+  }
+}
